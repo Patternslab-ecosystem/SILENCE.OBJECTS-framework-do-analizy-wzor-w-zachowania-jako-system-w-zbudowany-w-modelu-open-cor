@@ -1,223 +1,292 @@
-SILENCE.OBJECTS
+# 🔇 SILENCE.OBJECTS
 
-SILENCE.OBJECTS to framework do analizy wzorów zachowania jako systemów, zbudowany w modelu open‑core: publiczne pakiety @silence/* (MIT) + zamknięty SILENCE Engine i Portal dla klientów instytucjonalnych.
-Zamiast diagnozować ludzi, framework opisuje strukturę zdarzeń, napięć, rytmów i capacity – w języku inżynieryjnym, zgodnym z S11 i EU AI Act (limited‑risk, bez języka klinicznego).[^2][^3]
-Publiczne monorepo daje developerom i zespołom badawczym kompletny zestaw kontraktów, typów i referencyjną aplikację PatternLens, na których można budować własne narzędzia, a warstwa enterprise (Engine, Portal, pełne safety / compliance / billing) jest rozwijana w prywatnym control plane.[^4][^1]
-Sekcja „Research & Academic Collaboration”
+**SILENCE.OBJECTS** is an open‑core framework for **structural behavioral analysis** – patterns, sequences, rhythms, attention – designed for privacy, neurodiversity, and EU‑grade compliance (GDPR + EU AI Act, limited‑risk).
 
-SILENCE.OBJECTS jest projektowany tak, aby uczelnie, laboratoria i zespoły badawcze mogły pracować z danymi behawioralnymi bez wchodzenia w obszar medycznej diagnozy czy oceny zdrowia.[^1][^2]
-Kontrakty obiektów, eventów i profili zostały zdefiniowane pod kątem sekwencji, rytmów, capacity i profili uwagi, a nie kategorii klinicznych, co ułatwia budowanie projektów zgodnych z GDPR i EU AI Act (limited‑risk, no emotion / trait recognition).[^3][^1]
+It powers two main products:
 
-Oferujemy współpracę z partnerami akademickimi w dwóch trybach:
+- **PatternLens (B2C)** – a personal cockpit that helps you notice how you think, without judging you.
+- **PatternsLab (B2B/B2R)** – a workspace for teams, organizations, and researchers to work with patterns at group level.
 
-    korzystanie z open‑core (pakiety @silence/* + PatternLens) jako bazy do własnych badań,
-
-    wspólne projekty z dostępem do zanonimizowanych, strukturalnych danych i narzędzi PatternsLab, na podstawie jasno zdefiniowanego Academic Data Contract.[^5][^2]
-
-Business & Monetization Overview (dla inwestorów)
-
-Model biznesowy SILENCE.OBJECTS opiera się na buyer‑based open‑core: wszystko, co potrzebne twórcom i indywidualnym użytkownikom (kontrakty, pakiety @silence/*, referencyjna appka PatternLens), jest dostępne publicznie, natomiast wartość komercyjną budujemy w warstwie enterprise – SILENCE Engine, Portal, PatternsLab i pełne dashboardy instytucjonalne.[^6][^7][^1]
-
-Monetyzacja odbywa się na trzech poziomach:
-
-    PatternLens PRO (B2C / prosumer) – płatne plany rozszerzające liczbę interpretacji, alternatyw i funkcji archiwum, zgodnie z zasadami 04‑MONETIZATION / 04‑PRODUCT‑RULES (więcej widoczności w czasie, nie „więcej opieki”).[^7][^6]
-
-    PatternsLab & Portal (B2B / teams / orgs) – licencje tenant‑based oraz usage‑based dla organizacji, które chcą pracować na sygnałach z pracy i współpracy (capacity, napięcia, rytmy) na własnych danych, z pełną obsługą compliance, audytu i multi‑tenant safety.[^5][^1]
-
-    Enterprise Engine & Integrations – projekty partnerskie, gdzie SILENCE Engine staje się warstwą analityczną pod istniejące systemy (HR, ops, wellbeing‑adjacent), z rozliczaniem per użycie (AI tokens, events) i dodatkowymi modułami jak predictive, intervention timing, analytics dashboard i billing.[^6][^1]
-
-Dla inwestorów oznacza to: otwarty ekosystem developerów i researcherów, który naturalnie prowadzi do adopcji enterprise Engine i Portalu tam, gdzie pojawia się potrzeba skalowania, governance i zgodności regulacyjnej.
-<div align="center">⁂</div>
-[^1]: SILENCE.OBJECTS-Moduly-Frameworka-Open-Source-i-Closed.md  
-[^2]: 00-CONTRACT.md  
-[^3]: S11-System-Sterylnosci-Jezykowej-SILENCE.OBJECTS.md  
-[^4]: KONFIGURACJA-SRODOWISKA-PRODUKCYJNEGO-_-DEWELOPERSKIEGO-SILENCE.OBJECTS.docx  
-[^5]: 05-PATTERNSLAB-PROFILE.md  
-[^6]: 04-MONETIZATION.md  
-[^7]: 04-PRODUCT-RULES.md
-# SILENCE.OBJECTS — Open‑Core Framework for Behavioral Patterns
-
-**To repozytorium zawiera publiczną, open‑core implementację frameworka SILENCE.OBJECTS oraz jego publiczne kontrakty.**  
-Wszystkie moduły i aplikacje znajdujące się tutaj są dostępne na licencji MIT i mogą być swobodnie używane, modyfikowane i rozwijane przez społeczność, researcherów i firmy.
-
-Moduły **enterprise** (SILENCE Engine, Portal, pełna warstwa monetyzacji, zaawansowane bezpieczeństwo, compliance i runtime) są rozwijane w **oddzielnym, prywatnym monorepo** i udostępniane wyłącznie na warunkach komercyjnych – dla klientów instytucjonalnych i partnerów strategicznych.
+No diagnostics. No therapy. No performance scoring. Only **behavioral patterns and attention profiles**, expressed in neutral, structural language.
 
 ---
 
-## Zakres publicznego repozytorium
+## 🧱 Core ideas
 
-Publiczna część SILENCE.OBJECTS obejmuje:
+- **Open‑core by design**  
+  Most building blocks live under `@silence/*` and are MIT‑licensed. Enterprise‑grade and high‑risk modules live in `ee/@silence/*`.
 
-- **Open‑core packages (`@silence/*`)** – wszystkie moduły niezbędne do pracy z danymi behawioralnymi w sposób bezpieczny i zgodny z regulacjami (lista poniżej).
-- **Referencyjną aplikację PatternLens (`apps/patternlens`)** – przykład użycia frameworka w praktyce (B2C, voice‑first, offline‑first).
-- **Komplet dokumentacji kontraktów i zasad**:
-  - `00-CONTRACT.md` – definiuje obiekt, 4 fazy analizy i stanowczo oddziela analizę od diagnozy.
-  - `01-LANGUAGE.md` oraz S11 – system sterylności językowej (zakaz terminów klinicznych, język strukturalny).
-  - `02-SAFETY.md`, `02/03-AI-CONTRACT.md`, `03-RUNTIME-MODES.md` – kontrakty bezpieczeństwa i tryby pracy AI.
-  - `04-MONETIZATION.md`, `04-PRODUCT-RULES.md` – otwarte zasady monetyzacji (bez implementacji billingowej).
-  - `05-PATTERNSLAB-PROFILE.md` – profil warstwy badawczej PatternsLab.
+- **Behavioral, not clinical**  
+  We talk about patterns, rhythms, tension, capacity, recovery – not disorders, diagnoses, or “fixing people”. A dedicated S11 language system enforces this across code, UI, and prompts.
 
-**Czego NIE ma w tym repozytorium (moduły enterprise):**
+- **Compliance‑by‑design**  
+  From day one, the platform is built around GDPR, ePrivacy, and EU AI Act “limited‑risk” requirements: data minimisation, transparent consent, and clear separation from medical / HR decision systems.
+
+- **Research‑driven roadmap**  
+  Every major capability has a research module behind it (sequences, rhythms, interventions, capacity, attention profiles, relations). The code and the papers stay in sync.
+
+---
+
+## 🏗 Architecture at a glance
+
+SILENCE.OBJECTS is a 5‑layer platform:
+
+```text
+Layer I   Infrastructure      (DB, K8s, Edge, CI/CD)
+Layer II  AI & Integrations   (@silence/ai, voice, 3rd‑party models)
+Layer III SILENCE KERNEL      (@silence/core + @silence/* modules)
+Layer IV  Applications        (PatternLens, PatternsLab, Portal)
+Layer V   External Actors     (users, orgs, researchers, devices)
+```
+
+Monorepo layout:
+
+- `apps/`
+    - `patternlens-b2c` – PatternLens PWA
+    - `patternslab-b2b` – PatternsLab for orgs/research
+    - `portal` – founders / admin / compliance cockpit
+    - `ai-gateway`, `infra`, `orchestrator`, …
+- `packages/@silence/*` (open‑core)
+    - `contracts` – single source of truth for events & types
+    - `events` – typed event bus
+    - `behavioral-sequences` – sequence analysis (loops, n‑grams, transitions)
+    - `rhythmic-patterns` – behavioral rhythms (stay/switch)
+    - `cognitive-load` – non‑clinical cognitive load signals (self‑report + behavior)
+    - `capacity-recovery` – autonomy/competence/engagement indices
+    - `attention-profiles` – adaptive attention/interaction profiles (UI only, no diagnosis)
+    - `language` – S11 language guardrails
+    - `validator` – contracts + language + safety checks in CI
+    - `ui` – design system
+    - `sdk` – the only public kernel interface
+    - `ema`, `consent`, `cff` (planned)
+- `ee/@silence/*` (closed / enterprise)
+    - `ai`, `voice`, `predictive-core`, `predictive-human-factors`, `safety`,
+`medical`, `legal`, `advanced-analytics`, `advanced-safety`,
+`cognitive-load-pro`, `staircase`, `audit`, …
+
+Applications only import from `@silence/sdk`, `@silence/ui` and shared utils. Everything else in the kernel is internal and can evolve without breaking apps.
+
+---
+
+## 📦 Scope of this repository
+
+### Public part of SILENCE.OBJECTS
+
+This public repository contains:
+
+- **Open‑core packages (`@silence/*`)** – all modules necessary to work with behavioral data in a safe and regulation‑compliant way (see full list below).
+- **Reference application PatternLens (`apps/patternlens`)** – a practical example of how to use the framework (B2C, voice‑first, offline‑first).
+- **Complete contract and policy documentation**:
+    - `00-CONTRACT.md` – defines the Object, the 4‑phase analysis, and strictly separates analysis from diagnosis.
+    - `01-LANGUAGE.md` and S11 – language sterility system (no clinical terms, structural language only).
+    - `02-SAFETY.md`, `02/03-AI-CONTRACT.md`, `03-RUNTIME-MODES.md` – safety contracts and AI runtime modes.
+    - `04-MONETIZATION.md`, `04-PRODUCT-RULES.md` – open monetization principles (without billing implementation).
+    - `05-PATTERNSLAB-PROFILE.md` – profile of the PatternsLab research layer.
+
+### What's NOT in this repository (enterprise modules)
+
+The following enterprise modules are **not** included – they live in a separate private control plane and are available only under commercial terms:
 
 - `@silence/ee-behavioral-engine`, `@silence/ee-ai`, `@silence/ee-predictive`, `@silence/ee-intervention-timing`
 - `@silence/ee-safety`, `@silence/ee-medical`, `@silence/ee-legal`, `@silence/ee-audit`
 - `@silence/ee-analytics-dashboard`, `@silence/ee-billing`, `@silence/ee-orchestrator`, `@silence/ee-linkedin-agent`
-- Portal, PatternsLab w wersji produkcyjnej, konfiguracje środowiskowe i pełne reguły RLS.
+- Portal and PatternsLab production versions, environment configurations, and full RLS policies.
 
-Wszystkie wymienione wyżej elementy są opisane w dokumentacji, ale ich implementacja pozostaje zamknięta i dostępna wyłącznie w modelu enterprise.
-
----
-
-## Co jest w tym repo (scope)
-
-### Open‑core packages (`@silence/*`) – MIT
-
-- `@silence/contracts` — centralny kontrakt typów: Object, eventy, profile, metryki.
-- `@silence/events` — typowany event bus, kompatybilny z Redis Streams / CloudEvents.
-- `@silence/behavioral-sequences` — sekwencje zachowań (n‑gramy, przejścia, rytmy).
-- `@silence/rhythmic-patterns` — rytmy uwagi jako behawioralne proxy, bez sygnałów medycznych.
-- `@silence/cognitive-load` — obciążenie poznawcze z NASA‑TLX + niespecyficzne wskaźniki behawioralne.
-- `@silence/capacity-recovery` — profile „capacity” (autonomia / kompetencja / zaangażowanie) jako self‑tracking, nie klinika.
-- `@silence/attention-profiles` — adaptacyjne profile uwagi do zmiany UI (adaptive UI, not a diagnostic tool).
-- `@silence/language` — S11 guardrails językowe (forbidden vocabulary, mapowania, enforcement).
-- `@silence/validator` — walidacja kontraktów, eventów i konfiguracji + S11 w CI.
-- `@silence/ui` — design system dla PatternLens, PatternsLab i Portalu.
-
-### Referencyjna aplikacja B2C – PatternLens (`apps/patternlens`)
-
-- Wejście Object (50–5000 znaków)
-- Analiza 4‑fazowa (Context, Tension, Meaning, Function)
-- Confidence scores + alternatywne interpretacje
-- Archiwum interpretacji, eksport, podstawowe paywalle (FREE / PRO) na poziomie UX
-
-### Kontrakty i zasady operacyjne (dokumentacja)
-
-- `00-CONTRACT.md` — kontrakt ramowy: Object, 4 fazy, brak diagnozy, brak rekomendacji.
-- `01-LANGUAGE.md` + S11 — system sterylności językowej (limited‑risk AI, brak języka klinicznego).
-- `02-SAFETY.md`, `02-AI-CONTRACT.md`, `03-AI-CONTRACT.md`, `03-RUNTIME-MODES.md` — kontrakty bezpieczeństwa, tryby runtime i granice odpowiedzialności AI.
-- `04-MONETIZATION.md`, `04-PRODUCT-RULES.md` — otwarte zasady monetyzacji (model FREE / PRO / ENTERPRISE), bez implementacji billingowej.
-- `05-PATTERNSLAB-PROFILE.md` — profil PatternsLab jako warstwy research / B2B.
-
-To repo można klonować, forknąć i używać jako **open‑core foundation** do własnych projektów produktowych i badawczych.
+All the above are described in the documentation, but their implementation remains closed and accessible only in the enterprise model.
 
 ---
 
-## Czego tutaj NIE ma (co jest prywatne / enterprise)
+## 🧩 Open‑core packages (`@silence/*`) – MIT
 
-Świadomie **nie publikujemy** kodu, który stanowi nasz enterprise moat i warstwę produkcyjną dla klientów instytucjonalnych:
+| Package | Description |
+|---------|-------------|
+| `@silence/contracts` | Central type contracts: Object, events, profiles, metrics. |
+| `@silence/events` | Typed event bus, compatible with Redis Streams / CloudEvents. |
+| `@silence/behavioral-sequences` | Behavior sequence analysis (n‑grams, transitions, rhythms). |
+| `@silence/rhythmic-patterns` | Attention rhythms as behavioral proxies, no medical signals. |
+| `@silence/cognitive-load` | Cognitive load from NASA‑TLX + non‑specific behavioral indicators. |
+| `@silence/capacity-recovery` | "Capacity" profiles (autonomy/competence/engagement) as self‑tracking, not clinical. |
+| `@silence/attention-profiles` | Adaptive attention profiles for UI customization (adaptive UI, not a diagnostic tool). |
+| `@silence/language` | S11 language guardrails (forbidden vocabulary, mappings, enforcement). |
+| `@silence/validator` | Validation of contracts, events, and config + S11 in CI. |
+| `@silence/ui` | Design system for PatternLens, PatternsLab, and Portal. |
 
-- **SILENCE Engine (closed, enterprise)** – prywatne pakiety `@silence/ee/*`, m.in.:
-  - `@silence/ee-behavioral-engine` — fasada integrująca wszystkie moduły open‑core i orkiestrująca przepływy (bez redefiniowania logiki open).
-  - `@silence/ee-ai` — warstwa LLM (Claude / GPT) z CFF, S11 Gateway i pełnym billingiem tokenów.
-  - `@silence/ee-predictive`, `@silence/ee-intervention-timing` — predykcja trajektorii wzorców, JITAI dla instytucji.
-  - `@silence/ee-safety`, `@silence/ee-medical`, `@silence/ee-legal`, `@silence/ee-audit` — moduły safety, compliance, EU AI Act / GDPR, audyt i post‑market monitoring.
-  - `@silence/ee-analytics-dashboard`, `@silence/ee-billing`, `@silence/ee-orchestrator`, `@silence/ee-linkedin-agent` — dashboardy instytucjonalne, billing, orchestracja, B2B agents.
+### Reference B2C application – PatternLens (`apps/patternlens`)
 
-- **Portal / PatternsLab / pełne dashboardy B2B**:
-  - zaawansowane widoki multi‑tenant, governance, role‑based access,
-  - metryki dla zespołów, raporty instytucjonalne, integracje z systemami HR / ops.
+- Object input (50–5000 characters)
+- 4‑phase analysis (Context, Tension, Meaning, Function)
+- Confidence scores + alternative interpretations
+- Interpretation archive, export, basic paywalls (FREE / PRO) at UX level
 
-- **Produkcja i infra**:
-  - konfiguracja Vercel / Supabase / CI/CD dla środowisk produkcyjnych,
-  - pełne reguły RLS, logika tenantów, scenariusze high‑risk (tam, gdzie EU AI Act wymaga szczegółowego Technical File).
+### Contracts and operational policies (documentation)
 
-To wszystko żyje w prywatnym monorepo (control plane), gdzie współpracujemy 1:1 z klientami i inwestorami.
+- `00-CONTRACT.md` – framework contract: Object, 4 phases, no diagnosis, no recommendations.
+- `01-LANGUAGE.md` + S11 – language sterility system (limited‑risk AI, no clinical language).
+- `02-SAFETY.md`, `02-AI-CONTRACT.md`, `03-AI-CONTRACT.md`, `03-RUNTIME-MODES.md` – safety contracts, runtime modes, and AI responsibility boundaries.
+- `04-MONETIZATION.md`, `04-PRODUCT-RULES.md` – open monetization principles (FREE / PRO / ENTERPRISE model), without billing implementation.
+- `05-PATTERNSLAB-PROFILE.md` – PatternsLab profile as research / B2B layer.
 
----
-
-## Model open‑core: jak z tego korzystać
-
-Ten projekt jest zaprojektowany tak, żeby:
-
-- **indywidualne osoby i zespoły dev / research**:
-  - mogły używać open‑core pakietów (`@silence/*`) i referencyjnej aplikacji PatternLens jako punktu startowego do własnych narzędzi,
-  - miały jasne kontrakty (00-CONTRACT, AI-CONTRACT, LANGUAGE, SAFETY), na których można oprzeć własne implementacje.
-
-- **instytucje / partnerzy strategiczni**:
-  - mogły wejść w warstwę enterprise (Engine, Portal, full dashboards) poprzez dedykowaną współpracę – bez otwierania kodu, ale z pełnym wglądem w kontrakty, dokumentację compliance i runtime modes.
-
-Jeżeli budujesz produkt:
-
-- możesz korzystać z open‑core na licencji MIT,
-- możesz implementować własny silnik nad tymi samymi kontraktami,
-- albo możesz współpracować z nami, żeby podłączyć się pod gotowy SILENCE Engine i Portal.
+This repo can be cloned, forked, and used as an **open‑core foundation** for your own product and research projects.
 
 ---
 
-## Dla kogo jest ten projekt
+## 🔒 Open‑core model: how to use this
 
-- **Founders i product teams** – którzy chcą:
-  - zbudować system pracy z wzorcami zachowania bez wchodzenia w obszar medyczny / terapeutyczny,
-  - mieć od początku kontrakty zgodne z EU AI Act limited‑risk i S11 (brak diagnoz, brak rekomendacji „co robić z życiem”).
+This project is designed so that:
 
-- **Zespoły badawcze i labs**:
-  - które potrzebują spójnego modelu Objectów, eventów i profili, aby pracować na sekwencjach, rytmach, capacity, bez dotykania danych klinicznych.
+- **Individuals and dev/research teams**:
+    - can use open‑core packages (`@silence/*`) and the reference PatternLens app as a starting point for their own tools,
+    - have clear contracts (`00-CONTRACT`, `AI-CONTRACT`, `LANGUAGE`, `SAFETY`) on which to base their own implementations.
 
-- **Inwestorzy**:
-  - którzy chcą zobaczyć:
-    - co jest otwarte (pakiety, kontrakty, PatternLens),
-    - co stanowi moat (Engine, Portal, enforcement safety / compliance / billing),
-    - jak wygląda ścieżka monetyzacji (FREE / PRO / ENTERPRISE) i rozwój „nad” open‑core.
+- **Institutions / strategic partners**:
+    - can access the enterprise layer (Engine, Portal, full dashboards) through dedicated collaboration – without opening the code, but with full insight into contracts, compliance documentation, and runtime modes.
+
+If you're building a product:
+
+- you can use the open‑core under the MIT license,
+- you can implement your own engine on top of the same contracts,
+- or you can work with us to integrate the ready‑made SILENCE Engine and Portal.
 
 ---
 
-## Jak zacząć
+## 👥 Who is this for?
+
+- **Founders and product teams** – who want to:
+    - build a system for working with behavioral patterns without entering the medical/therapeutic space,
+    - have contracts from day one that are compliant with EU AI Act limited‑risk and S11 (no diagnoses, no "what to do with your life" recommendations).
+
+- **Research teams and labs**:
+    - who need a coherent model of Objects, events, and profiles to work on sequences, rhythms, capacity, without touching clinical data.
+
+- **Investors**:
+    - who want to see:
+        - what's open (packages, contracts, PatternLens),
+        - what constitutes the moat (Engine, Portal, safety/compliance/billing enforcement),
+        - how the monetization path (FREE / PRO / ENTERPRISE) and development "on top" of open‑core looks.
+
+---
+
+## 🚀 Getting started
 
 ```bash
 git clone https://github.com/Patternslab-ecosystem/SILENCE.OBJECTS-monorepo-public-.git
 cd SILENCE.OBJECTS-monorepo-public-
 pnpm install
-pnpm dev  # uruchom referencyjną aplikację PatternLens (dev)
+pnpm dev  # run the reference PatternLens app (dev)
 ```
 
-- Szczegóły środowiska: patrz `technical_runbook.md` (dev + Vercel / Supabase).
-- Kontrakty i polityki: zacznij od `00-CONTRACT.md` → `01-LANGUAGE.md` → `02-SAFETY.md` → `02/03-AI-CONTRACT.md` → `03-RUNTIME-MODES.md`.
+- Environment details: see `technical_runbook.md` (dev + Vercel / Supabase).
+- Contracts and policies: start with `00-CONTRACT.md` → `01-LANGUAGE.md` → `02-SAFETY.md` → `02/03-AI-CONTRACT.md` → `03-RUNTIME-MODES.md`.
 
 ---
 
-## Research & Academic Collaboration
+## 📚 Research & Academic Collaboration
 
-SILENCE.OBJECTS jest projektowany tak, aby **uczelnie, laboratoria i zespoły badawcze** mogły pracować z danymi behawioralnymi bez wchodzenia w obszar medycznej diagnozy czy oceny zdrowia.  
-Kontrakty obiektów, eventów i profili zostały zdefiniowane pod kątem **sekwencji, rytmów, capacity i profili uwagi**, a nie kategorii klinicznych, co ułatwia budowanie projektów zgodnych z GDPR i EU AI Act (limited‑risk, no emotion / trait recognition).
+SILENCE.OBJECTS is designed so that **universities, labs, and research teams** can work with behavioral data without entering the area of medical diagnosis or health assessment.
 
-Oferujemy współpracę z partnerami akademickimi w dwóch trybach:  
-- korzystanie z open‑core (pakiety `@silence/*` + PatternLens) jako bazy do własnych badań,  
-- wspólne projekty z dostępem do zanonimizowanych, strukturalnych danych i narzędzi PatternsLab, na podstawie jasno zdefiniowanego Academic Data Contract.
+Object, event, and profile contracts are defined in terms of **sequences, rhythms, capacity, and attention profiles** – not clinical categories – which makes it easier to build projects compliant with GDPR and EU AI Act (limited‑risk, no emotion/trait recognition).
 
----
+We offer collaboration with academic partners in two modes:
 
-## Business & Monetization Overview (dla inwestorów)
-
-Model biznesowy SILENCE.OBJECTS opiera się na **buyer‑based open‑core**: wszystko, co potrzebne twórcom i indywidualnym użytkownikom (kontrakty, pakiety `@silence/*`, referencyjna appka PatternLens), jest dostępne publicznie, natomiast wartość komercyjną budujemy w warstwie enterprise – SILENCE Engine, Portal, PatternsLab i pełne dashboardy instytucjonalne.
-
-Monetyzacja odbywa się na trzech poziomach:
-
-- **PatternLens PRO (B2C / prosumer)** – płatne plany rozszerzające liczbę interpretacji, alternatyw i funkcji archiwum, zgodnie z zasadami `04-MONETIZATION.md` i `04-PRODUCT-RULES.md` (więcej widoczności w czasie, nie „więcej opieki”).
-- **PatternsLab & Portal (B2B / teams / orgs)** – licencje tenant‑based oraz usage‑based dla organizacji, które chcą pracować na sygnałach z pracy i współpracy (capacity, napięcia, rytmy) na własnych danych, z pełną obsługą compliance, audytu i multi‑tenant safety.
-- **Enterprise Engine & Integrations** – projekty partnerskie, gdzie SILENCE Engine staje się warstwą analityczną pod istniejące systemy (HR, ops, wellbeing‑adjacent), z rozliczaniem per użycie (AI tokens, events) i dodatkowymi modułami jak predictive, intervention timing, analytics dashboard i billing.
-
-Dla inwestorów oznacza to: **otwarty ekosystem developerów i researcherów**, który naturalnie prowadzi do adopcji enterprise Engine i Portalu tam, gdzie pojawia się potrzeba skalowania, governance i zgodności regulacyjnej.
+- using the open‑core (`@silence/*` packages + PatternLens) as a base for your own research,
+- joint projects with access to anonymized, structural data and PatternsLab tools, based on a clearly defined Academic Data Contract.
 
 ---
 
-## Kontakt i współpraca enterprise
+## 💼 Business & Monetization Overview (for investors)
 
-- Strona: [https://patternlens.app](https://patternlens.app)  
-- LinkedIn:  
-  - Founder: [https://www.linkedin.com/in/ewatchorzewska/](https://www.linkedin.com/in/ewatchorzewska/)  
-  - Company: [https://www.linkedin.com/company/silence-objects/](https://www.linkedin.com/company/silence-objects/)
+The SILENCE.OBJECTS business model is based on **buyer‑based open‑core**: everything creators and individual users need (contracts, `@silence/*` packages, the reference PatternLens app) is publicly available, while commercial value is built in the enterprise layer – SILENCE Engine, Portal, PatternsLab, and full institutional dashboards.
 
-Jeśli:
+Monetization happens on three levels:
 
-- chcesz użyć open‑core w swoim produkcie,
-- potrzebujesz dostępu do Engine i Portalu w trybie enterprise,
-- albo interesuje Cię wspólny research,
+- **PatternLens PRO (B2C / prosumer)** – paid plans extending the number of interpretations, alternatives, and archive functions, following the principles in `04-MONETIZATION.md` and `04-PRODUCT-RULES.md` (more visibility over time, not "more care").
+- **PatternsLab & Portal (B2B / teams / orgs)** – tenant‑based and usage‑based licenses for organizations that want to work on signals from work and collaboration (capacity, tensions, rhythms) on their own data, with full compliance, audit, and multi‑tenant safety.
+- **Enterprise Engine & Integrations** – partnership projects where the SILENCE Engine becomes an analytical layer under existing systems (HR, ops, wellbeing‑adjacent), with per‑use billing (AI tokens, events) and additional modules like predictive, intervention timing, analytics dashboard, and billing.
 
-napisz do nas – chętnie porozmawiamy o współpracy.
+For investors, this means: an **open ecosystem of developers and researchers** that naturally leads to adoption of the enterprise Engine and Portal where the need for scale, governance, and regulatory compliance arises.
 
 ---
 
-**Licencja:** MIT (dla open‑core).  
-**Status projektu:** aktywny rozwój, stabilny fundament open‑core, warstwa enterprise dostępna dla partnerów.
-```
+## 📖 Documentation
 
+Core docs live under `docs/` and in a few top‑level files:
+
+### Architecture & monorepo
+
+- `silence-summary.md` – high‑level overview (layers, apps, modules)
+- `silence-arch-complete.md` – full architecture (5 layers, data flows, security)
+- `silence-repos-packages.md` – monorepo structure, packages, dependencies
+- `silence-arch-diagrams.md` – ASCII diagrams, data flows, deployment topology
+- `silence-implementation.md` – step‑by‑step implementation guide
+
+### Open‑core modules
+
+- `Moduly-Frameworka-Open-Source.md` – describes all open `@silence/*` modules, their purpose, and the research they are grounded in (behavioral sequences, rhythms, cognitive load, capacity, attention profiles, etc.)
+
+### Data, consent & compliance
+
+- `DATA_AND_CONSENT_PATTERNLENS_MVP_2026.md` – data categories, purposes, legal bases (GDPR/ePrivacy), consent UX, retention, user rights for PatternLens
+- `docs/compliance/*` – risk logs for limited‑risk modules (e.g. `@silence/attention-profiles`), Technical File templates (Annex IV) + risk management sections for high‑risk modules (`@silence/safety`, `@silence/predictive-human-factors`)
+
+### Pricing & monetization
+
+- `MONETYZACJA_PATTERNLENS_2026.md` – FREE / PRO / TEAM model, limits, AI analysis packages, one‑off reports
+- `APPENDIX_PRICING_GUARDRAILS_2026.md` – "Pricing constitution" – no dark patterns, no "pay or OK", transparent credits & limits, clear separation between value and safety/privacy
+
+### S11 – Language sterility system
+
+- `docs/s11/README.md` – what S11 is and why it exists
+- `docs/s11/S11_POLICY.md` – forbidden vs allowed language (no clinical terms, only structural)
+- `docs/s11/S11_GUARDRAILS_G1_G2.md` – build‑time linter + runtime guardrails
+- `docs/s11/S11_COMPLIANCE.md` – how S11 supports EU AI Act & GDPR
+- `docs/s11/S11_INTERNAL_CERTIFICATE.md` – internal S11 certification
+- `docs/s11/IMPLEMENTATION_CHECKLIST.md` – dev checklist
+
+---
+
+## 🧭 Project status (2026)
+
+- Monorepo layout, core packages and app skeletons are defined.
+- Data & consent skeleton for PatternLens MVP is drafted and ready for legal review.
+- S11 language framework and pricing guardrails are specified and wired into the architecture.
+- Research roadmap (R‑SEQ, R‑ATTN, R‑CONSENT, R‑INT, R‑RHYTHM, R‑CAP) is in `docs/research/`, linked to specific modules.
+
+We are deliberately moving **slow and right**: the goal is a platform that can stand up to regulators, researchers, and real users in 2026+, not just a quick demo.
+
+---
+
+## 🤝 Contributing
+
+SILENCE.OBJECTS is an open‑core project. Contributions are welcome to:
+
+- open modules under `packages/@silence/*`,
+- documentation (`docs/*`), especially research summaries and implementation notes,
+- tooling for S11 (linters, checkers, test cases).
+
+Before opening a PR, please:
+
+- read `silence-summary.md` and `silence-arch-complete.md`,
+- check `docs/s11/IMPLEMENTATION_CHECKLIST.md` (language & safety),
+- follow import rules (`@silence/sdk` only from apps).
+
+---
+
+## 📫 Contact & enterprise collaboration
+
+- Website: [https://patternlens.app](https://patternlens.app)
+- LinkedIn:
+    - Founder: [https://www.linkedin.com/in/ewatchorzewska/](https://www.linkedin.com/in/ewatchorzewska/)
+    - Company: [https://www.linkedin.com/company/silence-objects/](https://www.linkedin.com/company/silence-objects/)
+
+If you:
+
+- want to use the open‑core in your product,
+- need access to the Engine and Portal in enterprise mode,
+- or are interested in joint research,
+
+reach out – we'd be happy to talk about collaboration.
+
+---
+
+**License:** MIT (for open‑core).  
+**Project status:** active development, stable open‑core foundation, enterprise layer available for partners.
