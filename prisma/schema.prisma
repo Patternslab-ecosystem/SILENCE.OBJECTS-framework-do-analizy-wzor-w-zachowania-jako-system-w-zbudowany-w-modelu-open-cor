@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Object {
+  id        String   @id @default(cuid())
+  userId    String?
+  text      String   @db.Text
+  domain    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  interpretations Interpretation[]
+}
+
+model Interpretation {
+  id        String   @id @default(cuid())
+  objectId  String
+  object    Object   @relation(fields: [objectId], references: [id], onDelete: Cascade)
+  model     String
+  phases    Json     // Przechowuje tablicę InterpretationPhase[]
+  createdAt DateTime @default(now())
+}
