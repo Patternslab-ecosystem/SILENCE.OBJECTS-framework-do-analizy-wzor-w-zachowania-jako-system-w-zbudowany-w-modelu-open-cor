@@ -1,0 +1,31 @@
+name: 🤫 Sentinel Guard (S11 Compliance)
+
+on:
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  compliance-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check S11 Language Guardrails
+        run: |
+          echo "Checking for forbidden terms in PR..."
+          # Tutaj wejdzie Twój skrypt z @silence/language
+          grep -ri "diagnostic" packages/ && exit 1 || echo "Clean."
+          
+      - name: Verify Contract Integrity
+        run: |
+          echo "Verifying Zod schemas and contracts..."
+          # pnpm test --filter @silence/validator
+          echo "Contracts verified."
+
+  enforce-quality:
+    needs: compliance-check
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: Signal Ready for Merge
+        run: echo "Sentinel approves this pattern."

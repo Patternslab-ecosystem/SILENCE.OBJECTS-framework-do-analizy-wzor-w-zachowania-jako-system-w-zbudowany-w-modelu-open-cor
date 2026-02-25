@@ -1,0 +1,4 @@
+# Każda zmiana w pakietach open-core i ee musi przejść przez review
+* @Patternslab-ecosystem
+/packages/ @silence-sentinel-agent # Symulowany agent (DIPLO BIBLE)
+/ee/       @Patternslab-ecosystem
